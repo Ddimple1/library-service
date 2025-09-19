@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { HTTP_STATUS } from "../constants/httpConstants";
 import * as bookService from "../services/bookService";
+import { DatabaseSync } from "node:sqlite";
 
 export const getAllBooks = (req: Request, res: Response): void => {
     try {
@@ -124,3 +125,19 @@ export const getRecommendations = (req: Request, res: Response): void => {
         });
     }
 };
+
+export const getavailablebooks = (req: Request, res: Response): void => {
+    try {
+        const availablebooks =  bookService.getavailablebooks();
+        res.status(HTTP_STATUS.OK).json({
+            message: " Available books are",
+            data: availablebooks,
+            count: availablebooks.length,
+        });
+    } catch (error) {
+        res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+            message: "Error while finding book.",
+        });
+    }
+};
+
