@@ -141,3 +141,17 @@ export const getavailablebooks = (req: Request, res: Response): void => {
     }
 };
 
+export const getstatistics = (req: Request, res: Response): void => {
+    try {
+        const statistics =  bookService.getstatistics();
+        res.status(HTTP_STATUS.OK).json({
+            message: " Book collection statistics are",
+            data: statistics
+        });
+    } catch (error) {
+        res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+            message: "Error while fetching books statistics..",
+        });
+    }
+};
+

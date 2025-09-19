@@ -225,3 +225,44 @@ export const getavailablebooks = (): Book[] => {
     return structuredClone(books.filter((book) => book.isBorrowed === false)
 );
 };
+
+/**
+ *  Gets a list of available books in the library.
+ * 
+ * @returns {Book[] Array of availablebooks}
+ * 
+ * @example
+ * const available = getavailablebooks();
+ * console.log(`Found {available.length} available books`);
+ */
+
+/**
+ * 
+ * @returns {{
+ * totalBooks: number,
+ * availableBooks: number,
+ * borrowedBooks: number,
+ * genreBreakdown: Record<string, number>
+ * }}
+ * 
+ * @example
+ * const stats = getstatistics();
+ * console.log(`Total: {stats.totalBooks}, Available: {stats.availableBooks}`);
+ */
+export const getstatistics = ()  => {
+    const totalBooks = books.length;
+    const availableBooks = books.filter((b) => b.isBorrowed === false).length
+    const borrowedBooks = books.filter((b) => b.isBorrowed).length
+
+    // genre breakdown
+    const genreBreakdown: Record<string, number> = {};
+    books.forEach((book) => {
+        genreBreakdown[book.genre] = (genreBreakdown[book.genre] || 0) + 1;
+    })
+
+return{totalBooks,
+    availableBooks,
+    borrowedBooks,
+    genreBreakdown,
+};
+};

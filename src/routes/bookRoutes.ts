@@ -7,7 +7,9 @@ import {
     borrowBook,
     returnBook,
     getRecommendations,
-    getavailablebooks
+    getavailablebooks,
+    getstatistics,
+    
 } from "../controllers/bookController";
 
 const router: Router = Router();
@@ -23,5 +25,6 @@ router.post("/:id/borrow", borrowBook);
 router.post("/:id/return", returnBook);
 router.get("/recommendations", getRecommendations);
 router.get("/available", getavailablebooks);
+router.get("/stats", getstatistics);
 
 export default router;
